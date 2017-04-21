@@ -20,10 +20,12 @@
 #import <CoreAudio/CoreAudio.h>
 #import <AudioToolbox/AudioServices.h>
 
-
 const int kMaxDisplays = 16;
 const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
-
+@interface DDHotKeyAppDelegate() {
+    BOOL touchBarDisabled;
+}
+@end
 @implementation DDHotKeyAppDelegate
 
 @synthesize window, output;
@@ -46,7 +48,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     _statusItem.highlightMode = YES;
     
     NSMenu *menu = [[NSMenu alloc] init];
-    [menu addItemWithTitle:@"Enable Touch Bar" action:@selector(toggleTouchBar:) keyEquivalent:@""];
+    [menu addItemWithTitle:@"Toggle Touch Bar" action:@selector(toggleTouchBar:) keyEquivalent:@""];
     [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
     
     [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
@@ -56,7 +58,17 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 }
 
 - (void)toggleTouchBar:(id)sender {
-    
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/bin/bash"];
+    if (touchBarDisabled) {
+        [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string app;launchctl load /System/Library/LaunchAgents/com.apple.controlstrip.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;pkill \"Touch Bar agent\""]];
+        [task launch];
+        touchBarDisabled = NO;
+    } else {
+        [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
+        [task launch];
+        touchBarDisabled = YES;
+    }
 }
 
 

@@ -51,8 +51,12 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         [self set_brightness:curr + 0.1];
     } else if (hkEvent.keyCode == kVK_ANSI_8) {
         [self muteVolume];
+    } else if (keyCode == kVK_ANSI_9) {
+        [self decreaseVolume];
     } else if (keyCode == kVK_ANSI_0) {
         [self increaseVolume];
+    } else {
+        
     }
     
 }
@@ -63,17 +67,63 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 	[self addOutput:[NSString stringWithFormat:@"Object: %@", anObject]];
 }
 
+- (void)decreaseVolume {
+    AudioDeviceID deviceID = GetDefaultAudioDevice();
+    Float32 currentVolume = getCurrentVolume(deviceID);
+    Float32 targetVolume = currentVolume - 0.1;
+    
+    NSLog(@"currentVolume is: %f", currentVolume);
+    setVolume(deviceID, targetVolume);
+}
+
+
 - (void)increaseVolume {
     AudioDeviceID deviceID = GetDefaultAudioDevice();
     Float32 currentVolume = getCurrentVolume(deviceID);
+    Float32 targetVolume = currentVolume + 0.1;
+
     NSLog(@"currentVolume is: %f", currentVolume);
-    SetMute(deviceID, currentVolume + 0.1);
+    setVolume(deviceID, targetVolume);
 }
 
 - (void)muteVolume {
     AudioDeviceID deviceID = GetDefaultAudioDevice();
     SetMute(deviceID, 1);
 }
+
+void setVolume(AudioDeviceID device, Float32 volume)
+{
+    Float32 newVolume = volume;
+    
+    AudioObjectPropertyAddress addressLeft = {
+        kAudioDevicePropertyVolumeScalar,
+        kAudioDevicePropertyScopeOutput,
+        1 /*LEFT_CHANNEL*/
+    };
+    
+    OSStatus err;
+    err = AudioObjectSetPropertyData(device, &addressLeft, 0, NULL, sizeof(volume), &newVolume);
+    if (err)
+    {
+        NSLog(@"something went wrong on the left side! %d", err);
+//        NSString * message;
+        /* big switch statement on err to set message */
+//        NSLog(@"error while %@muting: %@", (mute ? @"" : @"un"), message);
+    }
+    
+    AudioObjectPropertyAddress addressRight = {
+        kAudioDevicePropertyVolumeScalar,
+        kAudioDevicePropertyScopeOutput,
+        2 /*RIGHT_CHANNEL*/
+    };
+    err = AudioObjectSetPropertyData(device, &addressRight, 0, NULL, sizeof(volume), &newVolume);
+    if (err)
+    {
+        NSLog(@"something went wrong on the right side! %d", err);
+    }
+
+}
+
 
 void SetMute(AudioDeviceID device, UInt32 mute)
 {

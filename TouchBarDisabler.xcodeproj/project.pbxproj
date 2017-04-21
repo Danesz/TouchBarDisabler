@@ -8,15 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
-		256AC3DA0F4B6AC300CF3369 /* DDHotKeyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* DDHotKeyAppDelegate.m */; };
+		256AC3DA0F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.m */; };
 		55378E8C1135C0A70038E405 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55378E8B1135C0A70038E405 /* Carbon.framework */; };
 		55CD8D52181C222C003799D0 /* DDHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D4D181C222B003799D0 /* DDHotKeyCenter.m */; };
 		55CD8D53181C222C003799D0 /* DDHotKeyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D4F181C222C003799D0 /* DDHotKeyTextField.m */; };
 		55CD8D54181C222C003799D0 /* DDHotKeyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */; };
 		56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */; };
 		56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */; };
-		564A25D21EAA3F62009F2449 /* bar-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A25D01EAA3F62009F2449 /* bar-logo.png */; };
-		564A25D31EAA3F62009F2449 /* bar-logo-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A25D11EAA3F62009F2449 /* bar-logo-alt.png */; };
 		56A2326F1EA9A46100B0F798 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A2326E1EA9A46100B0F798 /* IOKit.framework */; };
 		56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A232701EA9A46900B0F798 /* ApplicationServices.framework */; };
 		56BF3DCB1EAA8F5700B05ABE /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */; };
@@ -30,8 +28,8 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		256AC3D80F4B6AC300CF3369 /* DDHotKeyAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHotKeyAppDelegate.h; sourceTree = "<group>"; };
-		256AC3D90F4B6AC300CF3369 /* DDHotKeyAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyAppDelegate.m; sourceTree = "<group>"; };
+		256AC3D80F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchBarDisablerAppDelegate.h; sourceTree = "<group>"; };
+		256AC3D90F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchBarDisablerAppDelegate.m; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* TouchBarDisabler_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchBarDisabler_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -45,12 +43,10 @@
 		55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyUtilities.m; sourceTree = "<group>"; };
 		56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		564A25D01EAA3F62009F2449 /* bar-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-logo.png"; sourceTree = "<group>"; };
-		564A25D11EAA3F62009F2449 /* bar-logo-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-logo-alt.png"; sourceTree = "<group>"; };
 		56A2326E1EA9A46100B0F798 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		56A232701EA9A46900B0F798 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
-		56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchAtLoginController.m; sourceTree = "<group>"; };
-		56BF3DCA1EAA8F5700B05ABE /* LaunchAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchAtLoginController.h; sourceTree = "<group>"; };
+		56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchAtLoginController.m; path = LaunchAtLoginController/LaunchAtLoginController.m; sourceTree = "<group>"; };
+		56BF3DCA1EAA8F5700B05ABE /* LaunchAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchAtLoginController.h; path = LaunchAtLoginController/LaunchAtLoginController.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TouchBarDisabler-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TouchBarDisabler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchBarDisabler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,11 +71,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				56BF3DCC1EAA911A00B05ABE /* LaunchAtLoginController */,
 				55CD8D55181C2F9E003799D0 /* DDHotKey */,
-				256AC3D80F4B6AC300CF3369 /* DDHotKeyAppDelegate.h */,
-				256AC3D90F4B6AC300CF3369 /* DDHotKeyAppDelegate.m */,
-				56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */,
-				56BF3DCA1EAA8F5700B05ABE /* LaunchAtLoginController.h */,
+				256AC3D80F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.h */,
+				256AC3D90F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -126,8 +121,9 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				256AC3F00F4B6AF500CF3369 /* TouchBarDisabler_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				256AC3F00F4B6AF500CF3369 /* TouchBarDisabler_Prefix.pch */,
+				8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -135,9 +131,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				564A25D01EAA3F62009F2449 /* bar-logo.png */,
-				564A25D11EAA3F62009F2449 /* bar-logo-alt.png */,
-				8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 			);
@@ -167,7 +160,16 @@
 				55CD8D50181C222C003799D0 /* DDHotKeyUtilities.h */,
 				55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */,
 			);
-			name = DDHotKey;
+			path = DDHotKey;
+			sourceTree = "<group>";
+		};
+		56BF3DCC1EAA911A00B05ABE /* LaunchAtLoginController */ = {
+			isa = PBXGroup;
+			children = (
+				56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */,
+				56BF3DCA1EAA8F5700B05ABE /* LaunchAtLoginController.h */,
+			);
+			name = LaunchAtLoginController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,10 +225,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				564A25D31EAA3F62009F2449 /* bar-logo-alt.png in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
-				564A25D21EAA3F62009F2449 /* bar-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +241,7 @@
 				55CD8D52181C222C003799D0 /* DDHotKeyCenter.m in Sources */,
 				55CD8D54181C222C003799D0 /* DDHotKeyUtilities.m in Sources */,
 				56BF3DCB1EAA8F5700B05ABE /* LaunchAtLoginController.m in Sources */,
-				256AC3DA0F4B6AC300CF3369 /* DDHotKeyAppDelegate.m in Sources */,
+				256AC3DA0F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.m in Sources */,
 				55CD8D53181C222C003799D0 /* DDHotKeyTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

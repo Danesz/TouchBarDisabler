@@ -658,7 +658,7 @@
                 <autoresizingMask key="autoresizingMask"/>
             </view>
         </window>
-        <customObject id="494" customClass="DDHotKeyAppDelegate">
+        <customObject id="494" customClass="TouchBarDisablerAppDelegate">
             <connections>
                 <outlet property="window" destination="371" id="532"/>
             </connections>

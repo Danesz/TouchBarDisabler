@@ -14,6 +14,7 @@
 		55CD8D53181C222C003799D0 /* DDHotKeyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D4F181C222C003799D0 /* DDHotKeyTextField.m */; };
 		55CD8D54181C222C003799D0 /* DDHotKeyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */; };
 		56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */; };
+		56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */; };
 		56A2326F1EA9A46100B0F798 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A2326E1EA9A46100B0F798 /* IOKit.framework */; };
 		56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A232701EA9A46900B0F798 /* ApplicationServices.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -40,6 +41,7 @@
 		55CD8D50181C222C003799D0 /* DDHotKeyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHotKeyUtilities.h; sourceTree = "<group>"; };
 		55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyUtilities.m; sourceTree = "<group>"; };
 		56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		56A2326E1EA9A46100B0F798 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		56A232701EA9A46900B0F798 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* DDHotKey-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DDHotKey-Info.plist"; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */,
 				56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */,
 				56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */,
 				56A2326F1EA9A46100B0F798 /* IOKit.framework in Frameworks */,
@@ -133,6 +136,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */,
 				56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */,
 				56A232701EA9A46900B0F798 /* ApplicationServices.framework */,
 				56A2326E1EA9A46100B0F798 /* IOKit.framework */,

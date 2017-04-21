@@ -18,6 +18,7 @@
 #include <IOKit/i2c/IOI2CInterface.h>
 #include <CoreFoundation/CoreFoundation.h>
 #import <CoreAudio/CoreAudio.h>
+#import <AudioToolbox/AudioServices.h>
 
 
 const int kMaxDisplays = 16;
@@ -28,7 +29,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 @synthesize window, output;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [self registerExample1:nil];
+    [self registerHotkeys];
 	// Insert code here to initialize your application
 }
 
@@ -64,7 +65,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 
 - (void)increaseVolume {
     AudioDeviceID deviceID = GetDefaultAudioDevice();
-    UInt32 currentVolume = getCurrentVolume(deviceID);
+    Float32 currentVolume = getCurrentVolume(deviceID);
     NSLog(@"currentVolume is: %f", currentVolume);
     SetMute(deviceID, currentVolume + 0.1);
 }
@@ -114,27 +115,25 @@ AudioDeviceID GetDefaultAudioDevice()
     return device;
 }
 
-UInt32 getCurrentVolume(AudioDeviceID device)
+Float32 getCurrentVolume(AudioDeviceID device)
 {
-    UInt32 size = sizeof(UInt32);
-    UInt32 muteVal;
-    
-    AudioObjectPropertyAddress address = {
-        kAudioDevicePropertyMute,
+    AudioObjectPropertyAddress propertyAddress = {
+        kAudioHardwareServiceDeviceProperty_VirtualMasterVolume,
         kAudioDevicePropertyScopeOutput,
-        0
+        kAudioObjectPropertyElementMaster
     };
     
-    OSStatus err;
-    err = AudioObjectGetPropertyData(device, &address, 0, NULL, &size, &muteVal);
-    if (err)
-    {
-        NSString * message;
-        /* big switch to set message */
-        NSLog(@"error while getting mute status: %@", message);
+    if(!AudioHardwareServiceHasProperty(device, &propertyAddress)) {
+        // An error occurred
     }
+    Float32 volume;
+    UInt32 dataSize = sizeof(volume);
+    OSStatus result = AudioHardwareServiceGetPropertyData(device, &propertyAddress, 0, NULL, &dataSize, &volume);
     
-    return muteVal;
+    if(kAudioHardwareNoError != result) {
+        
+    }
+    return volume;
 }
 
 BOOL GetMute(AudioDeviceID device)
@@ -234,7 +233,7 @@ BOOL GetMute(AudioDeviceID device)
     }
 }
 
-- (IBAction) registerExample1:(id)sender {
+- (void) registerHotkeys {
 	[self addOutput:@"Attempting to register hotkey for example 1"];
 	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
     DDHotKey* res1 = [c registerHotKeyWithKeyCode:kVK_ANSI_1 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
@@ -243,71 +242,19 @@ BOOL GetMute(AudioDeviceID device)
     DDHotKey* res4 = [c registerHotKeyWithKeyCode:kVK_ANSI_9 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
     DDHotKey* res5 = [c registerHotKeyWithKeyCode:kVK_ANSI_0 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
 
-	if (!res1 || !res2) {
-		[self addOutput:@"Unable to register hotkey for example 1"];
-	} else {
-		[self addOutput:@"Registered hotkey for example 1"];
-		[self addOutput:[NSString stringWithFormat:@"Registered: %@", [c registeredHotKeys]]];
-	}
-}
-//- (IBAction) registerExample1:(id)sender {
-//    [self addOutput:@"Attempting to register hotkey for example 1"];
-//    DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-//    if (![c registerHotKeyWithKeyCode:kVK_ANSI_V modifierFlags:NSControlKeyMask target:self action:@selector(hotkeyWithEvent:) object:nil]) {
-//        [self addOutput:@"Unable to register hotkey for example 1"];
-//    } else {
-//        [self addOutput:@"Registered hotkey for example 1"];
-//        [self addOutput:[NSString stringWithFormat:@"Registered: %@", [c registeredHotKeys]]];
-//    }
-//}
-- (IBAction) registerExample2:(id)sender {
-	[self addOutput:@"Attempting to register hotkey for example 2"];
-	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-	if (![c registerHotKeyWithKeyCode:kVK_ANSI_V modifierFlags:(NSControlKeyMask | NSAlternateKeyMask) target:self action:@selector(hotkeyWithEvent:object:) object:@"hello, world!"]) {
-		[self addOutput:@"Unable to register hotkey for example 2"];
-	} else {
-		[self addOutput:@"Registered hotkey for example 2"];
-		[self addOutput:[NSString stringWithFormat:@"Registered: %@", [c registeredHotKeys]]];
+    if (!res1 || !res2 ||!res3 ||!res4 ||!res5) {
+        [self addOutput:@"Unable to register hotkeys"];
+    } else {
+        [self addOutput:@"Registered hotkeys"];
+        [self addOutput:[NSString stringWithFormat:@"Registered: %@", [c registeredHotKeys]]];
 	}
 }
 
-- (IBAction) registerExample3:(id)sender {
-#if NS_BLOCKS_AVAILABLE
-	[self addOutput:@"Attempting to register hotkey for example 3"];
-	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-	int theAnswer = 42;
-	DDHotKeyTask task = ^(NSEvent *hkEvent) {
-		[self addOutput:@"Firing block hotkey"];
-		[self addOutput:[NSString stringWithFormat:@"Hotkey event: %@", hkEvent]];
-		[self addOutput:[NSString stringWithFormat:@"the answer is: %d", theAnswer]];	
-	};
-	if (![c registerHotKeyWithKeyCode:kVK_ANSI_V modifierFlags:(NSControlKeyMask | NSAlternateKeyMask | NSCommandKeyMask) task:task]) {
-		[self addOutput:@"Unable to register hotkey for example 3"];
-	} else {
-		[self addOutput:@"Registered hotkey for example 3"];
-		[self addOutput:[NSString stringWithFormat:@"Registered: %@", [c registeredHotKeys]]];
-	}
-#else
-	NSRunAlertPanel(@"Blocks not available", @"This example requires the 10.6 SDK", @"OK", nil, nil);
-#endif
+- (IBAction)disableTouchbar:(NSButton *)sender {
+    
 }
 
-- (IBAction) unregisterExample1:(id)sender {
-	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-	[c unregisterHotKeyWithKeyCode:kVK_ANSI_0 modifierFlags:NSFunctionKeyMask];
-	[self addOutput:@"Unregistered hotkey for example 1"];
-}
-
-- (IBAction) unregisterExample2:(id)sender {
-	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-	[c unregisterHotKeyWithKeyCode:kVK_ANSI_V modifierFlags:(NSControlKeyMask | NSAlternateKeyMask)];
-	[self addOutput:@"Unregistered hotkey for example 2"];
-}
-
-- (IBAction) unregisterExample3:(id)sender {
-	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-	[c unregisterHotKeyWithKeyCode:kVK_ANSI_V modifierFlags:(NSControlKeyMask | NSAlternateKeyMask | NSCommandKeyMask)];
-	[self addOutput:@"Unregistered hotkey for example 3"];
+- (IBAction)enableTouchBar:(NSButton *)sender {
 }
 
 @end

@@ -52,37 +52,51 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"touchBarDisabled"];
     if (num != nil) {
         touchBarDisabled = [num boolValue];
-        toggler.title = @"Enable Touch Bar";
+        if (touchBarDisabled) {
+            [self disableTouchBar];
+        } else {
+            [self enableTouchBar];
+        }
     }
     
-    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
+//    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
     
     [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
     [menu addItemWithTitle:@"Quit Touch Bar Disabler" action:@selector(terminate:) keyEquivalent:@""];
     _statusItem.menu = menu;
+}
+
+- (void)enableTouchBar {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/bin/bash"];
+    [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string app;launchctl load /System/Library/LaunchAgents/com.apple.controlstrip.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;pkill \"Touch Bar agent\";killall Dock"]];
+    [task launch];
+    touchBarDisabled = NO;
+    toggler.title = @"Disable Touch Bar";
+    [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"touchBarDisabled"];
+}
+
+- (void)disableTouchBar {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/bin/bash"];
+    [window makeKeyAndOrderFront:self];
+    [NSApp activateIgnoringOtherApps:YES];
+    [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
+    [task launch];
+    task.terminationHandler = ^(NSTask *task){
+        [window setIsVisible:NO];
+    };
+    touchBarDisabled = YES;
+    toggler.title = @"Enable Touch Bar";
+    [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"touchBarDisabled"];
 
 }
 
 - (void)toggleTouchBar:(id)sender {
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/bin/bash"];
     if (touchBarDisabled) {
-        [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string app;launchctl load /System/Library/LaunchAgents/com.apple.controlstrip.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;pkill \"Touch Bar agent\";killall Dock"]];
-        [task launch];
-        touchBarDisabled = NO;
-        toggler.title = @"Disable Touch Bar";
-        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"touchBarDisabled"];
+        [self enableTouchBar];
     } else {
-        [window makeKeyAndOrderFront:self];
-        [NSApp activateIgnoringOtherApps:YES];
-        [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
-        [task launch];
-        task.terminationHandler = ^(NSTask *task){
-            [window setIsVisible:NO];
-        };
-        touchBarDisabled = YES;
-        toggler.title = @"Enable Touch Bar";
-        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"touchBarDisabled"];
+        [self disableTouchBar];
     }
 }
 

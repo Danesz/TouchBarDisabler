@@ -19,6 +19,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #import <CoreAudio/CoreAudio.h>
 #import <AudioToolbox/AudioServices.h>
+#import "LaunchAtLoginController.h"
 
 const int kMaxDisplays = 16;
 const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
@@ -63,6 +64,9 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
     [menu addItemWithTitle:@"Quit Touch Bar Disabler" action:@selector(terminate:) keyEquivalent:@""];
     _statusItem.menu = menu;
+    
+    LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
+    [launchController setLaunchAtLogin:YES];
 }
 
 - (void)enableTouchBar {

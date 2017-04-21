@@ -16,8 +16,9 @@
 #include <IOKit/graphics/IOGraphicsLib.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <IOKit/i2c/IOI2CInterface.h>
-
 #include <CoreFoundation/CoreFoundation.h>
+#import <CoreAudio/CoreAudio.h>
+
 
 const int kMaxDisplays = 16;
 const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
@@ -46,6 +47,8 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         [self set_brightness:curr - 0.1];
     } else if (hkEvent.keyCode == kVK_ANSI_2) {
         [self set_brightness:curr + 0.1];
+    } else if (hkEvent.keyCode == kVK_ANSI_8) {
+        [self muteVolume];
     }
     
 }
@@ -55,6 +58,81 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 	[self addOutput:[NSString stringWithFormat:@"Hotkey event: %@", hkEvent]];
 	[self addOutput:[NSString stringWithFormat:@"Object: %@", anObject]];
 }
+
+
+- (void)muteVolume {
+    AudioDeviceID deviceID = GetDefaultAudioDevice();
+    SetMute(deviceID, YES);
+}
+
+void SetMute(AudioDeviceID device, BOOL mute)
+{
+    UInt32 muteVal = (UInt32)mute;
+    
+    AudioObjectPropertyAddress address = {
+        kAudioDevicePropertyMute,
+        kAudioDevicePropertyScopeOutput,
+        0
+    };
+    
+    OSStatus err;
+    err = AudioObjectSetPropertyData(device, &address, 0, NULL, sizeof(UInt32), &muteVal);
+    if (err)
+    {
+        NSString * message;
+        /* big switch statement on err to set message */
+        NSLog(@"error while %@muting: %@", (mute ? @"" : @"un"), message);
+    }
+}
+
+AudioDeviceID GetDefaultAudioDevice()
+{
+    OSStatus err;
+    AudioDeviceID device = 0;
+    UInt32 size = sizeof(AudioDeviceID);
+    AudioObjectPropertyAddress address = {
+        kAudioHardwarePropertyDefaultOutputDevice,
+        kAudioObjectPropertyScopeGlobal,
+        kAudioObjectPropertyElementMaster
+    };
+    
+    err = AudioObjectGetPropertyData(kAudioObjectSystemObject, &address, 0, NULL, &size, &device);
+    if (err)
+    {
+        NSLog(@"could not get default audio output device");
+    }
+    
+    return device;
+}
+
+BOOL GetMute(AudioDeviceID device)
+{
+    UInt32 size = sizeof(UInt32);
+    UInt32 muteVal;
+    
+    AudioObjectPropertyAddress address = {
+        kAudioDevicePropertyMute,
+        kAudioDevicePropertyScopeOutput,
+        0
+    };
+    
+    OSStatus err;
+    err = AudioObjectGetPropertyData(device,
+                                     &address,
+                                     0,
+                                     NULL,
+                                     &size,
+                                     &muteVal);
+    if (err)
+    {
+        NSString * message;
+        /* big switch to set message */
+        NSLog(@"error while getting mute status: %@", message);
+    }
+    
+    return (BOOL)muteVal;
+}
+
 
 - (float) get_brightness {
     CGDirectDisplayID display[kMaxDisplays];
@@ -134,7 +212,8 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
     DDHotKey* res1 = [c registerHotKeyWithKeyCode:kVK_ANSI_1 modifierFlags:NSEventModifierFlagFunction target:self action:@selector(hotkeyWithEvent:) object:nil];
     DDHotKey* res2 = [c registerHotKeyWithKeyCode:kVK_ANSI_2 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
-//    BOOL res2 =
+    DDHotKey* res3 = [c registerHotKeyWithKeyCode:kVK_ANSI_8 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+
 	if (!res1 || !res2) {
 		[self addOutput:@"Unable to register hotkey for example 1"];
 	} else {

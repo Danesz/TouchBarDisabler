@@ -27,6 +27,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 @synthesize window, output;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self registerExample1:nil];
 	// Insert code here to initialize your application
 }
 
@@ -39,10 +40,14 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 - (void) hotkeyWithEvent:(NSEvent *)hkEvent {
 	[self addOutput:[NSString stringWithFormat:@"Firing -[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]];
 	[self addOutput:[NSString stringWithFormat:@"Hotkey event: %@", hkEvent]];
-    NSLog(@"%f", [self get_brightness]);
     float curr = [self get_brightness];
-    float new = curr + 0.1;
-    [self set_brightness:new];
+    NSLog(@"%f", [self get_brightness]);
+    if (hkEvent.keyCode == kVK_ANSI_1) {
+        [self set_brightness:curr - 0.1];
+    } else if (hkEvent.keyCode == kVK_ANSI_2) {
+        [self set_brightness:curr + 0.1];
+    }
+    
 }
 
 - (void) hotkeyWithEvent:(NSEvent *)hkEvent object:(id)anObject {
@@ -127,7 +132,10 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 - (IBAction) registerExample1:(id)sender {
 	[self addOutput:@"Attempting to register hotkey for example 1"];
 	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
-	if (![c registerHotKeyWithKeyCode:kVK_ANSI_1 modifierFlags:NSControlKeyMask target:self action:@selector(hotkeyWithEvent:) object:nil]) {
+    DDHotKey* res1 = [c registerHotKeyWithKeyCode:kVK_ANSI_1 modifierFlags:NSEventModifierFlagFunction target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res2 = [c registerHotKeyWithKeyCode:kVK_ANSI_2 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+//    BOOL res2 =
+	if (!res1 || !res2) {
 		[self addOutput:@"Unable to register hotkey for example 1"];
 	} else {
 		[self addOutput:@"Registered hotkey for example 1"];

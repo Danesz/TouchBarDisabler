@@ -648,21 +648,78 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="TouchBarDisabler" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
-            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="1" height="1"/>
+        <window title="TouchBarDisabler" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
+            <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="578" y="199" width="630" height="320"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
-            <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="1" height="1"/>
+            <value key="minSize" type="size" width="630" height="320"/>
+            <value key="maxSize" type="size" width="630" height="320"/>
+            <view key="contentView" wantsLayer="YES" misplaced="YES" id="372">
+                <rect key="frame" x="0.0" y="0.0" width="630" height="320"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <visualEffectView misplaced="YES" blendingMode="behindWindow" material="dark" state="active" id="qXO-91-wSF">
+                        <rect key="frame" x="0.0" y="0.0" width="630" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
+                        </userDefinedRuntimeAttributes>
+                    </visualEffectView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="Nyv-Ca-iDc">
+                        <rect key="frame" x="0.0" y="0.0" width="630" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_disabled" id="pO3-fN-mwI"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="yGi-0u-Yba">
+                        <rect key="frame" x="538" y="21" width="59" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="roundTextured" title="OK" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="Sya-TI-9qC">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="hasSeenHelperOnce:" target="494" id="4iv-Gn-sjZ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
+                </userDefinedRuntimeAttributes>
             </view>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                    <color key="value" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="opaque" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="436" y="436"/>
         </window>
         <customObject id="494" customClass="TouchBarDisablerAppDelegate">
             <connections>
+                <outlet property="emptyWindow" destination="xtC-Ze-rZb" id="HTe-Cg-HEc"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="xtC-Ze-rZb">
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="158" width="1" height="1"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <value key="minSize" type="size" width="1" height="1"/>
+            <value key="maxSize" type="size" width="1" height="1"/>
+            <view key="contentView" id="sUY-Kh-77l">
+                <rect key="frame" x="0.0" y="0.0" width="1" height="1"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+        </window>
     </objects>
+    <resources>
+        <image name="tb_disabled" width="1262" height="642"/>
+    </resources>
 </document>

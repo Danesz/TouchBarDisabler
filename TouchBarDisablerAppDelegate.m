@@ -13,16 +13,27 @@
 const int kMaxDisplays = 16;
 const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 @interface TouchBarDisablerAppDelegate() {
+    BOOL hasSeenHelperOnce;
     BOOL touchBarDisabled;
     NSMenu *menu;
     NSMenuItem *toggler;
+    NSMenuItem *showHelp;
+    NSMenuItem *quit;
+    __weak IBOutlet NSWindow *emptyWindow;
 }
 @end
 @implementation TouchBarDisablerAppDelegate
 
 @synthesize window;
 
+- (IBAction)hasSeenHelperOnce:(NSButton *)sender {
+    [window setIsVisible:NO];
+    hasSeenHelperOnce = YES;
+    [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"hasSeenHelperOnce"];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [window setLevel:NSFloatingWindowLevel];
     [self registerHotkeys];
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     _statusItem.title = @"T";
@@ -36,32 +47,47 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     
     menu = [[NSMenu alloc] init];
     toggler = [[NSMenuItem alloc] initWithTitle:@"Disable Touch Bar" action:@selector(toggleTouchBar:) keyEquivalent:@""];
+    showHelp = [[NSMenuItem alloc] initWithTitle:@"Shortcut Help" action:@selector(displayHUD:) keyEquivalent:@""];
+
     [menu addItem:toggler];
 
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"touchBarDisabled"];
+    NSNumber *helper = [[NSUserDefaults standardUserDefaults] objectForKey:@"hasSeenHelperOnce"];
+
+    if (helper != nil) {
+        hasSeenHelperOnce = [helper boolValue];
+    }
+    
     if (num != nil) {
         touchBarDisabled = [num boolValue];
         if (touchBarDisabled) {
             [self disableTouchBar];
         } else {
-//            [self enableTouchBar];
         }
     }
-    
 //    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
     
     [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
-    [menu addItemWithTitle:@"Quit Touch Bar Disabler" action:@selector(terminate:) keyEquivalent:@""];
+    quit = [[NSMenuItem alloc] initWithTitle:@"Quit Touch Bar Disabler" action:@selector(terminate:) keyEquivalent:@""];
+
+    [menu addItem:quit];
     _statusItem.menu = menu;
     
     LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
     [launchController setLaunchAtLogin:YES];
 }
 
+- (void)displayHUD:(id)sender {
+    [window setIsVisible:YES];
+}
+
 - (void)enableTouchBar {
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
     [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string app;launchctl load /System/Library/LaunchAgents/com.apple.controlstrip.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;pkill \"Touch Bar agent\";killall Dock"]];
+    task.terminationHandler = ^(NSTask *task){
+        [menu removeItem:showHelp];
+    };
     [task launch];
     touchBarDisabled = NO;
     toggler.title = @"Disable Touch Bar";
@@ -71,13 +97,18 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 - (void)disableTouchBar {
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
-    [window makeKeyAndOrderFront:self];
+    [emptyWindow makeKeyAndOrderFront:self];
     [NSApp activateIgnoringOtherApps:YES];
     [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
-    [task launch];
     task.terminationHandler = ^(NSTask *task){
-        [window setIsVisible:NO];
+        if (hasSeenHelperOnce == YES) {
+            [emptyWindow setIsVisible:NO];
+        } else {
+            [window setIsVisible:YES];
+        }
+        [menu addItem:showHelp];
     };
+    [task launch];
     touchBarDisabled = YES;
     toggler.title = @"Enable Touch Bar";
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"touchBarDisabled"];

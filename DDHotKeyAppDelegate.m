@@ -79,9 +79,11 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 
 - (void)increaseVolume {
     AudioDeviceID deviceID = GetDefaultAudioDevice();
+    if (GetMute(deviceID) == YES) {
+        SetMute(deviceID, NO);
+    }
     Float32 currentVolume = getCurrentVolume(deviceID);
     Float32 targetVolume = currentVolume + 0.1;
-
     NSLog(@"currentVolume is: %f", currentVolume);
     setVolume(deviceID, targetVolume);
 }
@@ -91,8 +93,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     SetMute(deviceID, 1);
 }
 
-void setVolume(AudioDeviceID device, Float32 volume)
-{
+void setVolume(AudioDeviceID device, Float32 volume) {
     Float32 newVolume = volume;
     
     AudioObjectPropertyAddress addressLeft = {
@@ -103,12 +104,8 @@ void setVolume(AudioDeviceID device, Float32 volume)
     
     OSStatus err;
     err = AudioObjectSetPropertyData(device, &addressLeft, 0, NULL, sizeof(volume), &newVolume);
-    if (err)
-    {
+    if (err) {
         NSLog(@"something went wrong on the left side! %d", err);
-//        NSString * message;
-        /* big switch statement on err to set message */
-//        NSLog(@"error while %@muting: %@", (mute ? @"" : @"un"), message);
     }
     
     AudioObjectPropertyAddress addressRight = {
@@ -117,16 +114,13 @@ void setVolume(AudioDeviceID device, Float32 volume)
         2 /*RIGHT_CHANNEL*/
     };
     err = AudioObjectSetPropertyData(device, &addressRight, 0, NULL, sizeof(volume), &newVolume);
-    if (err)
-    {
+    if (err) {
         NSLog(@"something went wrong on the right side! %d", err);
     }
-
 }
 
 
-void SetMute(AudioDeviceID device, UInt32 mute)
-{
+void SetMute(AudioDeviceID device, UInt32 mute) {
     UInt32 muteVal = (UInt32)mute;
     
     AudioObjectPropertyAddress address = {
@@ -140,7 +134,6 @@ void SetMute(AudioDeviceID device, UInt32 mute)
     if (err)
     {
         NSString * message;
-        /* big switch statement on err to set message */
         NSLog(@"error while %@muting: %@", (mute ? @"" : @"un"), message);
     }
 }

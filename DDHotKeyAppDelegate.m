@@ -32,7 +32,6 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 
 @synthesize window, output;
 
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self registerHotkeys];
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
@@ -55,7 +54,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         if (touchBarDisabled) {
             [self disableTouchBar];
         } else {
-            [self enableTouchBar];
+//            [self enableTouchBar];
         }
     }
     
@@ -411,13 +410,6 @@ BOOL GetMute(AudioDeviceID device)
         [self addOutput:@"Registered hotkeys"];
         [self addOutput:[NSString stringWithFormat:@"Registered: %@", [c registeredHotKeys]]];
 	}
-}
-
-- (IBAction)disableTouchbar:(NSButton *)sender {
-    
-}
-
-- (IBAction)enableTouchBar:(NSButton *)sender {
 }
 
 @end

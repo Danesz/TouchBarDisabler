@@ -34,8 +34,6 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self registerHotkeys];
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    
-    // The text that will be shown in the menu bar
     _statusItem.title = @"T";
     
     // The image that will be shown in the menu bar, a 16x16 black png works best
@@ -43,9 +41,12 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     
     // The highlighted image, use a white version of the normal image
 //    _statusItem.alternateImage = [NSImage imageNamed:@"bar-logo-alt"];
-    
-    // The image gets a blue background when the item is selected
     _statusItem.highlightMode = YES;
+    
+    NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"touchBarDisabled"];
+    if (num != nil) {
+        touchBarDisabled = [num boolValue];
+    }
     
     NSMenu *menu = [[NSMenu alloc] init];
     [menu addItemWithTitle:@"Toggle Touch Bar" action:@selector(toggleTouchBar:) keyEquivalent:@""];
@@ -61,13 +62,29 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
     if (touchBarDisabled) {
-        [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string app;launchctl load /System/Library/LaunchAgents/com.apple.controlstrip.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;pkill \"Touch Bar agent\""]];
+        [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string app;launchctl load /System/Library/LaunchAgents/com.apple.controlstrip.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl load /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;pkill \"Touch Bar agent\";killall Dock"]];
         [task launch];
         touchBarDisabled = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"touchBarDisabled"];
     } else {
+//        NSRect frame = NSMakeRect(0, 0, 200, 200);
+//        NSWindow* newWindow  = [[NSWindow alloc] initWithContentRect:frame
+//                                                         styleMask:NSBorderlessWindowMask
+//                                                           backing:NSBackingStoreBuffered
+//                                                             defer:NO];
+//        [newWindow setBackgroundColor:[NSColor blueColor]];
+//        [newWindow makeKeyAndOrderFront:NSApp];
+        [window makeKeyAndOrderFront:self];
+        [NSApp activateIgnoringOtherApps:YES];
         [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
         [task launch];
+        task.terminationHandler = ^(NSTask *task){
+            [window setIsVisible:NO];
+//            [NSApp deactivate];
+            // do things after completion
+        };
         touchBarDisabled = YES;
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"touchBarDisabled"];
     }
 }
 

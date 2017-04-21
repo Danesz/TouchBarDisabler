@@ -267,6 +267,7 @@
 				GCC_PREFIX_HEADER = DDHotKey_Prefix.pch;
 				INFOPLIST_FILE = "DDHotKey-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dim.touchBarDisabler;
 				PRODUCT_NAME = DDHotKey;
 			};
 			name = Debug;
@@ -282,6 +283,7 @@
 				GCC_PREFIX_HEADER = DDHotKey_Prefix.pch;
 				INFOPLIST_FILE = "DDHotKey-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dim.touchBarDisabler;
 				PRODUCT_NAME = DDHotKey;
 			};
 			name = Release;

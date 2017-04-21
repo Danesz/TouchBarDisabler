@@ -28,9 +28,40 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 
 @synthesize window, output;
 
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self registerHotkeys];
-	// Insert code here to initialize your application
+    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    
+    // The text that will be shown in the menu bar
+    _statusItem.title = @"T";
+    
+    // The image that will be shown in the menu bar, a 16x16 black png works best
+//    _statusItem.image = [NSImage imageNamed:@"bar-logo"];
+    
+    // The highlighted image, use a white version of the normal image
+//    _statusItem.alternateImage = [NSImage imageNamed:@"bar-logo-alt"];
+    
+    // The image gets a blue background when the item is selected
+    _statusItem.highlightMode = YES;
+    
+    NSMenu *menu = [[NSMenu alloc] init];
+    [menu addItemWithTitle:@"Enable Touch Bar" action:@selector(toggleTouchBar:) keyEquivalent:@""];
+    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
+    
+    [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
+    [menu addItemWithTitle:@"Quit Touch Bar Disabler" action:@selector(terminate:) keyEquivalent:@""];
+    _statusItem.menu = menu;
+
+}
+
+- (void)toggleTouchBar:(id)sender {
+    
+}
+
+
+- (void)showPreferencesPane:(id)sender {
+    
 }
 
 - (void) addOutput:(NSString *)newOutput {
@@ -43,12 +74,40 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 	[self addOutput:[NSString stringWithFormat:@"Firing -[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]];
 	[self addOutput:[NSString stringWithFormat:@"Hotkey event: %@", hkEvent]];
     float curr = [self get_brightness];
-    NSLog(@"%f", [self get_brightness]);
+//    NSLog(@"%f", [self get_brightness]);
     short keyCode = hkEvent.keyCode;
+    switch (keyCode) {
+        case kVK_ANSI_1:
+            [self set_brightness:curr - 0.1];
+            break;
+        case kVK_ANSI_2:
+            [self set_brightness:curr + 0.1];
+            break;
+        case kVK_ANSI_3:
+            [self toggleExpose];
+            break;
+        case kVK_ANSI_4:
+            [self toggleDashboard];
+            break;
+        case kVK_ANSI_5:
+            break;
+        case kVK_ANSI_6:
+            break;
+        case kVK_ANSI_7:
+            break;
+        case kVK_ANSI_8:
+            break;
+        case kVK_ANSI_9:
+            break;
+        case kVK_ANSI_0:
+            break;
+        default:
+            break;
+    }
     if (hkEvent.keyCode == kVK_ANSI_1) {
-        [self set_brightness:curr - 0.1];
+        
     } else if (hkEvent.keyCode == kVK_ANSI_2) {
-        [self set_brightness:curr + 0.1];
+        
     } else if (hkEvent.keyCode == kVK_ANSI_8) {
         [self muteVolume];
     } else if (keyCode == kVK_ANSI_9) {
@@ -58,8 +117,18 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     } else {
         
     }
-    
 }
+
+- (void)toggleExpose {
+    if(![[NSWorkspace sharedWorkspace] launchApplication:@"Mission Control"])
+        NSLog(@"Mission Control failed to launch");
+}
+
+- (void)toggleDashboard {
+    if(![[NSWorkspace sharedWorkspace] launchApplication:@"Dashboard"])
+        NSLog(@"Dashboard failed to launch");
+}
+
 
 - (void) hotkeyWithEvent:(NSEvent *)hkEvent object:(id)anObject {
 	[self addOutput:[NSString stringWithFormat:@"Firing -[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]];
@@ -75,7 +144,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         Float32 currentVolume = getCurrentVolume(deviceID);
         Float32 targetVolume = currentVolume - 0.1;
         
-        NSLog(@"currentVolume is: %f", currentVolume);
+//        NSLog(@"currentVolume is: %f", currentVolume);
         setVolume(deviceID, targetVolume);
     }
 }
@@ -286,11 +355,16 @@ BOOL GetMute(AudioDeviceID device)
 	DDHotKeyCenter *c = [DDHotKeyCenter sharedHotKeyCenter];
     DDHotKey* res1 = [c registerHotKeyWithKeyCode:kVK_ANSI_1 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
     DDHotKey* res2 = [c registerHotKeyWithKeyCode:kVK_ANSI_2 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
-    DDHotKey* res3 = [c registerHotKeyWithKeyCode:kVK_ANSI_8 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
-    DDHotKey* res4 = [c registerHotKeyWithKeyCode:kVK_ANSI_9 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
-    DDHotKey* res5 = [c registerHotKeyWithKeyCode:kVK_ANSI_0 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res3 = [c registerHotKeyWithKeyCode:kVK_ANSI_3 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res4 = [c registerHotKeyWithKeyCode:kVK_ANSI_4 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res5 = [c registerHotKeyWithKeyCode:kVK_ANSI_5 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res6 = [c registerHotKeyWithKeyCode:kVK_ANSI_6 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res7 = [c registerHotKeyWithKeyCode:kVK_ANSI_7 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res8 = [c registerHotKeyWithKeyCode:kVK_ANSI_8 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res9 = [c registerHotKeyWithKeyCode:kVK_ANSI_9 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
+    DDHotKey* res0 = [c registerHotKeyWithKeyCode:kVK_ANSI_0 modifierFlags:NSEventModifierFlagControl target:self action:@selector(hotkeyWithEvent:) object:nil];
 
-    if (!res1 || !res2 ||!res3 ||!res4 ||!res5) {
+    if (!res1 || !res2 ||!res3 ||!res4 ||!res5 ||!res6 ||!res7 ||!res8||!res9 || !res0) {
         [self addOutput:@"Unable to register hotkeys"];
     } else {
         [self addOutput:@"Registered hotkeys"];

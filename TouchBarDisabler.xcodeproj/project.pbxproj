@@ -15,6 +15,8 @@
 		55CD8D54181C222C003799D0 /* DDHotKeyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */; };
 		56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */; };
 		56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */; };
+		564A25D21EAA3F62009F2449 /* bar-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A25D01EAA3F62009F2449 /* bar-logo.png */; };
+		564A25D31EAA3F62009F2449 /* bar-logo-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A25D11EAA3F62009F2449 /* bar-logo-alt.png */; };
 		56A2326F1EA9A46100B0F798 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A2326E1EA9A46100B0F798 /* IOKit.framework */; };
 		56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A232701EA9A46900B0F798 /* ApplicationServices.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -42,6 +44,8 @@
 		55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyUtilities.m; sourceTree = "<group>"; };
 		56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		564A25D01EAA3F62009F2449 /* bar-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-logo.png"; sourceTree = "<group>"; };
+		564A25D11EAA3F62009F2449 /* bar-logo-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-logo-alt.png"; sourceTree = "<group>"; };
 		56A2326E1EA9A46100B0F798 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		56A232701EA9A46900B0F798 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TouchBarDisabler-Info.plist"; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				564A25D01EAA3F62009F2449 /* bar-logo.png */,
+				564A25D11EAA3F62009F2449 /* bar-logo-alt.png */,
 				8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
@@ -212,8 +218,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				564A25D31EAA3F62009F2449 /* bar-logo-alt.png in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				564A25D21EAA3F62009F2449 /* bar-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

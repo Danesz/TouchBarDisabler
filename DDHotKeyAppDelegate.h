@@ -11,7 +11,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface DDHotKeyAppDelegate : NSObject /*<NSApplicationDelegate>*/
-
+@property (strong, nonatomic) NSStatusItem *statusItem;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextView *output;
 

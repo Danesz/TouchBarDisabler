@@ -34,9 +34,9 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 }
 
 - (void) addOutput:(NSString *)newOutput {
-	NSString * current = [output string];
-	[output setString:[current stringByAppendingFormat:@"%@\n", newOutput]];
-	[output scrollRangeToVisible:NSMakeRange([[output string] length], 0)];
+//	NSString * current = [output string];
+//	[output setString:[current stringByAppendingFormat:@"%@\n", newOutput]];
+//	[output scrollRangeToVisible:NSMakeRange([[output string] length], 0)];
 }
 
 - (void) hotkeyWithEvent:(NSEvent *)hkEvent {
@@ -69,11 +69,15 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 
 - (void)decreaseVolume {
     AudioDeviceID deviceID = GetDefaultAudioDevice();
-    Float32 currentVolume = getCurrentVolume(deviceID);
-    Float32 targetVolume = currentVolume - 0.1;
-    
-    NSLog(@"currentVolume is: %f", currentVolume);
-    setVolume(deviceID, targetVolume);
+    if (GetMute(deviceID) == YES) {
+        SetMute(deviceID, NO);
+    } else {
+        Float32 currentVolume = getCurrentVolume(deviceID);
+        Float32 targetVolume = currentVolume - 0.1;
+        
+        NSLog(@"currentVolume is: %f", currentVolume);
+        setVolume(deviceID, targetVolume);
+    }
 }
 
 
@@ -81,11 +85,12 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     AudioDeviceID deviceID = GetDefaultAudioDevice();
     if (GetMute(deviceID) == YES) {
         SetMute(deviceID, NO);
+    } else {
+        Float32 currentVolume = getCurrentVolume(deviceID);
+        Float32 targetVolume = currentVolume + 0.1;
+        NSLog(@"currentVolume is: %f", currentVolume);
+        setVolume(deviceID, targetVolume);
     }
-    Float32 currentVolume = getCurrentVolume(deviceID);
-    Float32 targetVolume = currentVolume + 0.1;
-    NSLog(@"currentVolume is: %f", currentVolume);
-    setVolume(deviceID, targetVolume);
 }
 
 - (void)muteVolume {

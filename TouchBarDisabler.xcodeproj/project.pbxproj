@@ -15,21 +15,19 @@
 		55CD8D54181C222C003799D0 /* DDHotKeyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */; };
 		56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */; };
 		56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */; };
-		5657927E1EAA9A810051CEF1 /* tb_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 5657927D1EAA9A810051CEF1 /* tb_disabled.png */; };
 		56804CB71EAD9DA6008D76AB /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 56804CB61EAD9DA6008D76AB /* Icon.icns */; };
 		56A2326F1EA9A46100B0F798 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A2326E1EA9A46100B0F798 /* IOKit.framework */; };
 		56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A232701EA9A46900B0F798 /* ApplicationServices.framework */; };
+		56B8628A1EADADD400F01ED8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56B8628C1EADADD400F01ED8 /* Localizable.strings */; };
+		56B862901EADAFC400F01ED8 /* tb_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B862921EADAFC400F01ED8 /* tb_disabled.png */; };
 		56BF3DCB1EAA8F5700B05ABE /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchBarDisablerAppDelegate.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* TouchBarDisablerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchBarDisablerAppDelegate.m; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* TouchBarDisabler_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchBarDisabler_Prefix.pch; sourceTree = "<group>"; };
@@ -45,12 +43,17 @@
 		55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyUtilities.m; sourceTree = "<group>"; };
 		56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		5657927D1EAA9A810051CEF1 /* tb_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tb_disabled.png; sourceTree = "<group>"; };
 		56804CB61EAD9DA6008D76AB /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		56A2326E1EA9A46100B0F798 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		56A232701EA9A46900B0F798 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		56B8628B1EADADD400F01ED8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		56B8628E1EADAEE300F01ED8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		56B8628F1EADAEE300F01ED8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		56B862911EADAFC400F01ED8 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/tb_disabled.png; sourceTree = "<group>"; };
+		56B862931EADAFD300F01ED8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/tb_disabled.png"; sourceTree = "<group>"; };
 		56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchAtLoginController.m; path = LaunchAtLoginController/LaunchAtLoginController.m; sourceTree = "<group>"; };
 		56BF3DCA1EAA8F5700B05ABE /* LaunchAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchAtLoginController.h; path = LaunchAtLoginController/LaunchAtLoginController.h; sourceTree = "<group>"; };
+		56CDEDE71EADB18A0062753A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TouchBarDisabler-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TouchBarDisabler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchBarDisabler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -125,7 +128,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5657927D1EAA9A810051CEF1 /* tb_disabled.png */,
+				56B862921EADAFC400F01ED8 /* tb_disabled.png */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				256AC3F00F4B6AF500CF3369 /* TouchBarDisabler_Prefix.pch */,
 				8D1107310486CEB800E47090 /* TouchBarDisabler-Info.plist */,
@@ -137,8 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				56804CB61EAD9DA6008D76AB /* Icon.icns */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				56B8628C1EADADD400F01ED8 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				Japanese,
 				French,
 				German,
+				"zh-Hans",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* DDHotKey */;
 			projectDirPath = "";
@@ -231,9 +235,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5657927E1EAA9A810051CEF1 /* tb_disabled.png in Resources */,
+				56B8628A1EADADD400F01ED8 /* Localizable.strings in Resources */,
+				56B862901EADAFC400F01ED8 /* tb_disabled.png in Resources */,
 				56804CB71EAD9DA6008D76AB /* Icon.icns in Resources */,
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,20 +261,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1DDD58150DA1D0A300B32029 /* English */,
+				56B8628E1EADAEE300F01ED8 /* zh-Hans */,
+				56CDEDE71EADB18A0062753A /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		56B8628C1EADADD400F01ED8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56B8628B1EADADD400F01ED8 /* en */,
+				56B8628F1EADAEE300F01ED8 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		56B862921EADAFC400F01ED8 /* tb_disabled.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56B862911EADAFC400F01ED8 /* en */,
+				56B862931EADAFD300F01ED8 /* zh-Hans */,
+			);
+			name = tb_disabled.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -328,6 +343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -350,6 +366,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				SDKROOT = macosx;
 			};
 			name = Release;

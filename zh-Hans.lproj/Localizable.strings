@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  TouchBarDisabler
+
+  Created by Bright on 4/23/17.
+
+*/
+
+"ENABLE_TOUCH_BAR" = "开启 Touch Bar";
+"QUIT_TOUCH_BAR_DISABLER" = "退出实用工具";
+"DISABLE_TOUCH_BAR" = "停用 Touch Bar";
+
+"SHORTCUT_HELP" = "快捷键帮助";
+"OK" = "好";

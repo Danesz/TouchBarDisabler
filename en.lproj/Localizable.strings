@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  TouchBarDisabler
+
+  Created by Bright on 4/23/17.
+
+*/
+
+"ENABLE_TOUCH_BAR" = "Enable Touch Bar";
+"QUIT_TOUCH_BAR_DISABLER" = "Quit Touch Bar Disabler";
+"DISABLE_TOUCH_BAR" = "Disable Touch Bar";
+
+"SHORTCUT_HELP" = "Shortcut Help";
+"OK" = "OK";

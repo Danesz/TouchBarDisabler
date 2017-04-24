@@ -46,8 +46,11 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     _statusItem.highlightMode = YES;
     
     menu = [[NSMenu alloc] init];
-    toggler = [[NSMenuItem alloc] initWithTitle:@"Disable Touch Bar" action:@selector(toggleTouchBar:) keyEquivalent:@""];
-    showHelp = [[NSMenuItem alloc] initWithTitle:@"Shortcut Help" action:@selector(displayHUD:) keyEquivalent:@""];
+    NSString *disable = NSLocalizedString(@"DISABLE_TOUCH_BAR", nil);
+    NSString *shortcut = NSLocalizedString(@"SHORTCUT_HELP", nil);
+
+    toggler = [[NSMenuItem alloc] initWithTitle:disable action:@selector(toggleTouchBar:) keyEquivalent:@""];
+    showHelp = [[NSMenuItem alloc] initWithTitle:shortcut action:@selector(displayHUD:) keyEquivalent:@""];
 
     [menu addItem:toggler];
 
@@ -68,7 +71,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 //    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
     
     [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
-    quit = [[NSMenuItem alloc] initWithTitle:@"Quit Touch Bar Disabler" action:@selector(terminate:) keyEquivalent:@""];
+    quit = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"QUIT_TOUCH_BAR_DISABLER", nil) action:@selector(terminate:) keyEquivalent:@""];
 
     [menu addItem:quit];
     _statusItem.menu = menu;
@@ -90,7 +93,7 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     };
     [task launch];
     touchBarDisabled = NO;
-    toggler.title = @"Disable Touch Bar";
+    toggler.title = NSLocalizedString(@"DISABLE_TOUCH_BAR", nil);
     [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"touchBarDisabled"];
 }
 
@@ -110,7 +113,8 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     };
     [task launch];
     touchBarDisabled = YES;
-    toggler.title = @"Enable Touch Bar";
+    NSString *enable = NSLocalizedString(@"ENABLE_TOUCH_BAR", nil);
+    toggler.title = enable;
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"touchBarDisabled"];
 
 }

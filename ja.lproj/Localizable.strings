@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  TouchBarDisabler
+
+  Created by Bright on 4/23/17.
+
+*/
+
+"ENABLE_TOUCH_BAR" = "有効にする Touch Bar";
+"QUIT_TOUCH_BAR_DISABLER" = "Touch Bar Disablerを終了する";
+"DISABLE_TOUCH_BAR" = "無効にする Touch Bar";
+
+"SHORTCUT_HELP" = "ショートカットヘルプ";
+"OK" = "OK";
+"HINT_LABEL" = "タッチバーが無効になっています";
+"HINT_CONTENT" = "お気に入りの明るさと音量コントロールにはまだアクセスできます";

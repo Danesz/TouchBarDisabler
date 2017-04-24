@@ -45,6 +45,8 @@
 		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		563EB6641EADB62C00858299 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		563EB6661EADB66E00858299 /* tb_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tb_disabled.png; sourceTree = "<group>"; };
+		563EB6681EADB7D100858299 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		563EB6691EADB80900858299 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		56804CB61EAD9DA6008D76AB /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		56A2326E1EA9A46100B0F798 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		56A232701EA9A46900B0F798 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
@@ -218,6 +220,8 @@
 				French,
 				German,
 				"zh-Hans",
+				"zh-Hant",
+				ja,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* DDHotKey */;
 			projectDirPath = "";
@@ -264,6 +268,8 @@
 			children = (
 				56B8628B1EADADD400F01ED8 /* en */,
 				56B8628F1EADAEE300F01ED8 /* zh-Hans */,
+				563EB6681EADB7D100858299 /* zh-Hant */,
+				563EB6691EADB80900858299 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

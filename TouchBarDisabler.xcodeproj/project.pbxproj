@@ -16,6 +16,7 @@
 		56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */; };
 		56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */; };
 		5657927E1EAA9A810051CEF1 /* tb_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 5657927D1EAA9A810051CEF1 /* tb_disabled.png */; };
+		56804CB71EAD9DA6008D76AB /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 56804CB61EAD9DA6008D76AB /* Icon.icns */; };
 		56A2326F1EA9A46100B0F798 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A2326E1EA9A46100B0F798 /* IOKit.framework */; };
 		56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A232701EA9A46900B0F798 /* ApplicationServices.framework */; };
 		56BF3DCB1EAA8F5700B05ABE /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */; };
@@ -45,6 +46,7 @@
 		56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5657927D1EAA9A810051CEF1 /* tb_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tb_disabled.png; sourceTree = "<group>"; };
+		56804CB61EAD9DA6008D76AB /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		56A2326E1EA9A46100B0F798 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		56A232701EA9A46900B0F798 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		56BF3DC91EAA8F5700B05ABE /* LaunchAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchAtLoginController.m; path = LaunchAtLoginController/LaunchAtLoginController.m; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				56804CB61EAD9DA6008D76AB /* Icon.icns */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 			);
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5657927E1EAA9A810051CEF1 /* tb_disabled.png in Resources */,
+				56804CB71EAD9DA6008D76AB /* Icon.icns in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 			);

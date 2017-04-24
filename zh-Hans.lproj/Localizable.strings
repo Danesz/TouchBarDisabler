@@ -12,3 +12,5 @@
 
 "SHORTCUT_HELP" = "快捷键帮助";
 "OK" = "好";
+"HINT_LABEL" = "已停用 Touch Bar";
+"HINT_CONTENT" = "常用的亮度与音量调节按键依然可用";

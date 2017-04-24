@@ -20,6 +20,9 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     NSMenuItem *showHelp;
     NSMenuItem *quit;
     __weak IBOutlet NSWindow *emptyWindow;
+    __weak IBOutlet NSTextField *hintLabel;
+    __weak IBOutlet NSTextField *hintContent;
+    __weak IBOutlet NSButton *dismissButton;
 }
 @end
 @implementation TouchBarDisablerAppDelegate
@@ -33,6 +36,9 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [hintLabel setStringValue:NSLocalizedString(@"HINT_LABEL", nil)];
+    [hintContent setStringValue:NSLocalizedString(@"HINT_CONTENT", nil)];
+    [dismissButton setTitle:NSLocalizedString(@"OK", nil)];
     [window setLevel:NSFloatingWindowLevel];
     [self registerHotkeys];
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];

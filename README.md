@@ -1,5 +1,6 @@
 # TouchBarDisabler
-TouchBarDisabler allows users to manually turn off the Touch Bar on 2016 MacBook Pro devices. **System Integrity Protection needs to be turned off before using the app.**
+TouchBarDisabler allows users to manually turn off the Touch Bar on 2016 MacBook Pro devices.
+**System Integrity Protection must be turned off before using the app.**
 
 ![](https://raw.githubusercontent.com/HiKay/TouchBarDisabler/master/screenshots/screenshot.jpg "Screenshot of TouchBarDisabler")
 

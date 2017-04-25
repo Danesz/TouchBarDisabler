@@ -1,5 +1,6 @@
 # TouchBarDisabler
-TouchBarDisabler allows users to manually turn off the Touch Bar on 2016 MacBook Pro devices. System Integrity Protection needs to be turned off before using the app.
+TouchBarDisabler allows users to manually turn off the Touch Bar on 2016 MacBook Pro devices. **System Integrity Protection needs to be turned off before using the app.**
+
 ![](https://raw.githubusercontent.com/HiKay/TouchBarDisabler/master/screenshots/screenshot.jpg "Screenshot of TouchBarDisabler")
 
 **[Download TouchBarDisabler](https://github.com/HiKay/TouchBarDisabler/releases/download/1.3/TouchBarDisabler_1.3.zip)**
@@ -10,7 +11,7 @@ TouchBarDisabler allows users to manually turn off the Touch Bar on 2016 MacBook
 - Toggle between enabling and disabling Touch Bar
 - Remaps Brightness down to Ctrl+1, and Brightness Up to Ctrl+2.
 - Remaps Mute to Ctrl+8, Volume Down to Ctrl+9 and Volume Up to Ctrl+0.
-- TouchBarDisabler requires disabling System Integrity Protection. TouchBarDisabler does not disconnect iBridge from your system. Therefore, Apple Pay, Touch ID and FaceTime HD Camera continue to work.
+- **TouchBarDisabler requires disabling System Integrity Protection.** TouchBarDisabler does not disconnect iBridge from your system. Therefore, Apple Pay, Touch ID and FaceTime HD Camera continue to work.
 - Localized in English, Simplified Chinese, Traditional Chinese and Japanese.
 
 ## Notice

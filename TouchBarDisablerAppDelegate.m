@@ -110,13 +110,14 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     [NSApp activateIgnoringOtherApps:YES];
     [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
     task.terminationHandler = ^(NSTask *task){
-        if (hasSeenHelperOnce == YES) {
-            [emptyWindow setIsVisible:NO];
-        } else {
-            [window setIsVisible:YES];
-        }
+        [emptyWindow setIsVisible:NO];
         [menu addItem:showHelp];
     };
+    if (hasSeenHelperOnce) {
+        [emptyWindow setIsVisible:YES];
+    } else {
+        [window setIsVisible:YES];
+    }
     [task launch];
     touchBarDisabled = YES;
     NSString *enable = NSLocalizedString(@"ENABLE_TOUCH_BAR", nil);
@@ -170,26 +171,16 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         case kVK_ANSI_7:
             break;
         case kVK_ANSI_8:
+            [self muteVolume];
             break;
         case kVK_ANSI_9:
+            [self decreaseVolume];
             break;
         case kVK_ANSI_0:
+            [self increaseVolume];
             break;
         default:
             break;
-    }
-    if (hkEvent.keyCode == kVK_ANSI_1) {
-        
-    } else if (hkEvent.keyCode == kVK_ANSI_2) {
-        
-    } else if (hkEvent.keyCode == kVK_ANSI_8) {
-        [self muteVolume];
-    } else if (keyCode == kVK_ANSI_9) {
-        [self decreaseVolume];
-    } else if (keyCode == kVK_ANSI_0) {
-        [self increaseVolume];
-    } else {
-        
     }
 }
 

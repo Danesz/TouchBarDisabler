@@ -14,3 +14,5 @@
 "OK" = "OK";
 "HINT_LABEL" = "Touch Bar has been disabled.";
 "HINT_CONTENT" = "Your favorite brightness and volume controls are still accessible.";
+"SIP_ALERT_TITLE" = "System Integrity Protection is On";
+"SIP_ALERT_TEXT" = "TouchBarDisabler requires System Integrity Protection to be turned off first. Click on \"OK\" to learn about how to turn off System Integrity Protection.";

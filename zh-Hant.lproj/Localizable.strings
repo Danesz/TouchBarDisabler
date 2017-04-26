@@ -14,3 +14,5 @@
 "OK" = "好";
 "HINT_LABEL" = "已停用 Touch Bar";
 "HINT_CONTENT" = "常用的亮度與音量調節按鍵依然可用";
+"SIP_ALERT_TITLE" = "System Integrity Protection 處於開啟狀態";
+"SIP_ALERT_TEXT" = "需要先關閉 System Integrity Protection，才能正常運行 TouchBarDisabler。點擊 \"好\" 以進一步了解如何關閉 System Integrity Protection。";

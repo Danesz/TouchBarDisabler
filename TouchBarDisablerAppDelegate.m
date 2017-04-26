@@ -57,21 +57,21 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
 }
 
 - (void)readCompleted:(NSNotification *)notification {
-    NSLog(@"Read data: %@", [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem]);
+//    NSLog(@"Read data: %@", [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem]);
     NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
     NSString *strOutput = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"string value %@", strOutput);
+//    NSLog(@"string value %@", strOutput);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadToEndOfFileCompletionNotification object:[notification object]];
     if ([strOutput containsString:@"disabled"]) {
-        NSLog(@"SIP is disabled!");
+//        NSLog(@"SIP is disabled!");
         [self setupAppWhenSIPIsOff];
     } else {
-        NSLog(@"SIP on, showing onboard help!");
+//        NSLog(@"SIP on, showing onboard help!");
         
         NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:@"System Integrity Protection is On"];
-        [alert setInformativeText:@"TouchBarDisabler requires System Integrity Protection to be turned off first. Click on \"OK\" to learn about how to turn off System Integrity Protection."];
-        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:NSLocalizedString(@"SIP_ALERT_TITLE", nil)];
+        [alert setInformativeText:NSLocalizedString(@"SIP_ALERT_TEXT", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
         [alert runModal];
 
         noSIPWindow.titleVisibility = NSWindowTitleHidden;

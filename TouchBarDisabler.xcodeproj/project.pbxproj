@@ -303,6 +303,7 @@
 				GCC_PREFIX_HEADER = TouchBarDisabler_Prefix.pch;
 				INFOPLIST_FILE = "TouchBarDisabler-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.touchBarDisabler;
 				PRODUCT_NAME = TouchBarDisabler;
 			};
@@ -320,6 +321,7 @@
 				GCC_PREFIX_HEADER = TouchBarDisabler_Prefix.pch;
 				INFOPLIST_FILE = "TouchBarDisabler-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.touchBarDisabler;
 				PRODUCT_NAME = TouchBarDisabler;
 			};

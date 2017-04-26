@@ -22,6 +22,8 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     NSMenuItem *toggler;
     NSMenuItem *showHelp;
     NSMenuItem *quit;
+    NSMenuItem *onboardHelp;
+
     AVPlayer *player;
     __weak IBOutlet NSWindow *emptyWindow;
     __weak IBOutlet NSTextField *hintLabel;
@@ -56,6 +58,10 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     [task launch];
 }
 
+//
+//- (void)applicationDidBecomeActive:(NSNotification *)notification {
+//}
+
 - (void)readCompleted:(NSNotification *)notification {
 //    NSLog(@"Read data: %@", [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem]);
     NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
@@ -67,32 +73,42 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         [self setupAppWhenSIPIsOff];
     } else {
 //        NSLog(@"SIP on, showing onboard help!");
-        
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:NSLocalizedString(@"SIP_ALERT_TITLE", nil)];
-        [alert setInformativeText:NSLocalizedString(@"SIP_ALERT_TEXT", nil)];
-        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
-        [alert runModal];
-
-        noSIPWindow.titleVisibility = NSWindowTitleHidden;
-        noSIPWindow.styleMask |= NSWindowStyleMaskFullSizeContentView;
-        [noSIPWindow setIsVisible:YES];
-
-        NSURL* url = [[NSBundle mainBundle] URLForResource:@"disable_sip_guide" withExtension:@"mp4"];
-        player = [[AVPlayer alloc] initWithURL:url];
-        onboardVideo.player = player;
-        onboardVideo.controlsStyle = AVPlayerViewControlsStyleNone;
-        
-        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(playerItemDidReachEnd:)
-                                                     name:AVPlayerItemDidPlayToEndTimeNotification
-                                                   object:[player currentItem]];
-
-        [player play];
-
+        [self showOnboardHelp];
     }
+}
+
+- (void)windowWillClose:(NSNotification *)notification {
+    if (notification.object == noSIPWindow) {
+        NSLog(@"%@ window will close", notification.object);
+        player = nil;
+        [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:0.0];
+    }
+}
+
+- (void)showOnboardHelp {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:NSLocalizedString(@"SIP_ALERT_TITLE", nil)];
+    [alert setInformativeText:NSLocalizedString(@"SIP_ALERT_TEXT", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+    [alert runModal];
+    noSIPWindow.delegate = self;
+    noSIPWindow.titleVisibility = NSWindowTitleHidden;
+    noSIPWindow.styleMask |= NSWindowStyleMaskFullSizeContentView;
+    [noSIPWindow setIsVisible:YES];
+    
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"disable_sip_guide" withExtension:@"mp4"];
+    player = [[AVPlayer alloc] initWithURL:url];
+    onboardVideo.player = player;
+    onboardVideo.controlsStyle = AVPlayerViewControlsStyleNone;
+    
+    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[player currentItem]];
+//    showOnboardForThisRun = YES;
+    [player play];
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -123,8 +139,10 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     
     toggler = [[NSMenuItem alloc] initWithTitle:disable action:@selector(toggleTouchBar:) keyEquivalent:@""];
     showHelp = [[NSMenuItem alloc] initWithTitle:shortcut action:@selector(displayHUD:) keyEquivalent:@""];
-    
+//    onboardHelp = [[NSMenuItem alloc] initWithTitle:@"Onboard Help" action:@selector(showOnboardHelp) keyEquivalent:@""];
+
     [menu addItem:toggler];
+//    [menu addItem:onboardHelp];
     
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"touchBarDisabled"];
     NSNumber *helper = [[NSUserDefaults standardUserDefaults] objectForKey:@"hasSeenHelperOnce"];

@@ -4,7 +4,7 @@ TouchBarDisabler allows users to manually turn off the Touch Bar on 2016 MacBook
 
 ![](https://raw.githubusercontent.com/HiKay/TouchBarDisabler/master/screenshots/screenshot.jpg "Screenshot of TouchBarDisabler")
 
-**[Download TouchBarDisabler](https://github.com/HiKay/TouchBarDisabler/releases/download/1.4/TouchBarDisabler_1.4.zip)**
+**[Download TouchBarDisabler](https://github.com/HiKay/TouchBarDisabler/releases/download/1.5/TouchBarDisabler_1.5.zip)**
 
 **[What should I do If I am unable to open TouchBarDisabler?](FAQ.md)**
 

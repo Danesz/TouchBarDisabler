@@ -12,6 +12,9 @@
 		55CD8D52181C222C003799D0 /* DDHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D4D181C222B003799D0 /* DDHotKeyCenter.m */; };
 		55CD8D53181C222C003799D0 /* DDHotKeyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D4F181C222C003799D0 /* DDHotKeyTextField.m */; };
 		55CD8D54181C222C003799D0 /* DDHotKeyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */; };
+		560000A11EB11F8A0009DA59 /* disable_sip_guide.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 560000A01EB11F8A0009DA59 /* disable_sip_guide.mp4 */; };
+		560000A31EB11FA10009DA59 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560000A21EB11FA10009DA59 /* AVFoundation.framework */; };
+		560000A51EB11FA70009DA59 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560000A41EB11FA70009DA59 /* AVKit.framework */; };
 		56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */; };
 		56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */; };
 		563EB6651EADB62C00858299 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 563EB6641EADB62C00858299 /* MainMenu.xib */; };
@@ -41,6 +44,9 @@
 		55CD8D4F181C222C003799D0 /* DDHotKeyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyTextField.m; sourceTree = "<group>"; };
 		55CD8D50181C222C003799D0 /* DDHotKeyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHotKeyUtilities.h; sourceTree = "<group>"; };
 		55CD8D51181C222C003799D0 /* DDHotKeyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyUtilities.m; sourceTree = "<group>"; };
+		560000A01EB11F8A0009DA59 /* disable_sip_guide.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = disable_sip_guide.mp4; sourceTree = "<group>"; };
+		560000A21EB11FA10009DA59 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		560000A41EB11FA70009DA59 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		563EB6641EADB62C00858299 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -63,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560000A51EB11FA70009DA59 /* AVKit.framework in Frameworks */,
+				560000A31EB11FA10009DA59 /* AVFoundation.framework in Frameworks */,
 				56105AFE1EA9AF3100FF1F59 /* AudioToolbox.framework in Frameworks */,
 				56105AFC1EA9A75D00FF1F59 /* CoreAudio.framework in Frameworks */,
 				56A232711EA9A46900B0F798 /* ApplicationServices.framework in Frameworks */,
@@ -140,6 +148,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				560000A01EB11F8A0009DA59 /* disable_sip_guide.mp4 */,
 				56804CB61EAD9DA6008D76AB /* Icon.icns */,
 				56B8628C1EADADD400F01ED8 /* Localizable.strings */,
 			);
@@ -149,6 +158,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				560000A41EB11FA70009DA59 /* AVKit.framework */,
+				560000A21EB11FA10009DA59 /* AVFoundation.framework */,
 				56105AFD1EA9AF3100FF1F59 /* AudioToolbox.framework */,
 				56105AFB1EA9A75D00FF1F59 /* CoreAudio.framework */,
 				56A232701EA9A46900B0F798 /* ApplicationServices.framework */,
@@ -237,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560000A11EB11F8A0009DA59 /* disable_sip_guide.mp4 in Resources */,
 				56B8628A1EADADD400F01ED8 /* Localizable.strings in Resources */,
 				56804CB71EAD9DA6008D76AB /* Icon.icns in Resources */,
 				563EB6651EADB62C00858299 /* MainMenu.xib in Resources */,
@@ -281,6 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -299,6 +312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;

@@ -9,6 +9,9 @@
 #import <CoreAudio/CoreAudio.h>
 #import <AudioToolbox/AudioServices.h>
 #import "LaunchAtLoginController.h"
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
+@import CoreMedia;
 
 const int kMaxDisplays = 16;
 const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
@@ -19,10 +22,13 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     NSMenuItem *toggler;
     NSMenuItem *showHelp;
     NSMenuItem *quit;
+    AVPlayer *player;
     __weak IBOutlet NSWindow *emptyWindow;
     __weak IBOutlet NSTextField *hintLabel;
     __weak IBOutlet NSTextField *hintContent;
     __weak IBOutlet NSButton *dismissButton;
+    __weak IBOutlet NSWindow *noSIPWindow;
+    __weak IBOutlet AVPlayerView *onboardVideo;
 }
 @end
 @implementation TouchBarDisablerAppDelegate
@@ -35,7 +41,67 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"hasSeenHelperOnce"];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)detectSIP {
+    [self launch];
+}
+
+- (void)launch {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/csrutil"];
+    [task setArguments:[NSArray arrayWithObjects:@"status", nil]];
+    NSPipe *outputPipe = [NSPipe pipe];
+    [task setStandardOutput:outputPipe];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readCompleted:) name:NSFileHandleReadToEndOfFileCompletionNotification object:[outputPipe fileHandleForReading]];
+    [[outputPipe fileHandleForReading] readToEndOfFileInBackgroundAndNotify];
+    [task launch];
+}
+
+- (void)readCompleted:(NSNotification *)notification {
+    NSLog(@"Read data: %@", [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem]);
+    NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
+    NSString *strOutput = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"string value %@", strOutput);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadToEndOfFileCompletionNotification object:[notification object]];
+    if ([strOutput containsString:@"disabled"]) {
+        NSLog(@"SIP is disabled!");
+        [self setupAppWhenSIPIsOff];
+    } else {
+        NSLog(@"SIP on, showing onboard help!");
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"System Integrity Protection is On"];
+        [alert setInformativeText:@"TouchBarDisabler requires System Integrity Protection to be turned off first. Click on \"OK\" to learn about how to turn off System Integrity Protection."];
+        [alert addButtonWithTitle:@"OK"];
+        [alert runModal];
+
+        noSIPWindow.titleVisibility = NSWindowTitleHidden;
+        noSIPWindow.styleMask |= NSWindowStyleMaskFullSizeContentView;
+        [noSIPWindow setIsVisible:YES];
+
+        NSURL* url = [[NSBundle mainBundle] URLForResource:@"disable_sip_guide" withExtension:@"mp4"];
+        player = [[AVPlayer alloc] initWithURL:url];
+        onboardVideo.player = player;
+        onboardVideo.controlsStyle = AVPlayerViewControlsStyleNone;
+        
+        player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playerItemDidReachEnd:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:[player currentItem]];
+
+        [player play];
+
+    }
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero];
+}
+
+
+- (void)setupAppWhenSIPIsOff {
     [hintLabel setStringValue:NSLocalizedString(@"HINT_LABEL", nil)];
     [hintContent setStringValue:NSLocalizedString(@"HINT_CONTENT", nil)];
     [dismissButton setTitle:NSLocalizedString(@"OK", nil)];
@@ -45,24 +111,24 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     _statusItem.title = @"T";
     
     // The image that will be shown in the menu bar, a 16x16 black png works best
-//    _statusItem.image = [NSImage imageNamed:@"bar-logo"];
+    //    _statusItem.image = [NSImage imageNamed:@"bar-logo"];
     
     // The highlighted image, use a white version of the normal image
-//    _statusItem.alternateImage = [NSImage imageNamed:@"bar-logo-alt"];
+    //    _statusItem.alternateImage = [NSImage imageNamed:@"bar-logo-alt"];
     _statusItem.highlightMode = YES;
     
     menu = [[NSMenu alloc] init];
     NSString *disable = NSLocalizedString(@"DISABLE_TOUCH_BAR", nil);
     NSString *shortcut = NSLocalizedString(@"SHORTCUT_HELP", nil);
-
+    
     toggler = [[NSMenuItem alloc] initWithTitle:disable action:@selector(toggleTouchBar:) keyEquivalent:@""];
     showHelp = [[NSMenuItem alloc] initWithTitle:shortcut action:@selector(displayHUD:) keyEquivalent:@""];
-
+    
     [menu addItem:toggler];
-
+    
     NSNumber *num = [[NSUserDefaults standardUserDefaults] objectForKey:@"touchBarDisabled"];
     NSNumber *helper = [[NSUserDefaults standardUserDefaults] objectForKey:@"hasSeenHelperOnce"];
-
+    
     if (helper != nil) {
         hasSeenHelperOnce = [helper boolValue];
     }
@@ -74,16 +140,21 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
         } else {
         }
     }
-//    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
+    //    [menu addItemWithTitle:@"Advanced Preferences" action:@selector(showPreferencesPane:) keyEquivalent:@""];
     
     [menu addItem:[NSMenuItem separatorItem]]; // A thin grey line
     quit = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"QUIT_TOUCH_BAR_DISABLER", nil) action:@selector(terminate:) keyEquivalent:@""];
-
+    
     [menu addItem:quit];
     _statusItem.menu = menu;
     
     LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
     [launchController setLaunchAtLogin:YES];
+}
+
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self detectSIP];
 }
 
 - (void)displayHUD:(id)sender {

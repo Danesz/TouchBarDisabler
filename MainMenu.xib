@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="12120"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -724,6 +725,8 @@ DQ
                 <outlet property="emptyWindow" destination="xtC-Ze-rZb" id="HTe-Cg-HEc"/>
                 <outlet property="hintContent" destination="E9s-dH-qEH" id="ViC-G0-IWi"/>
                 <outlet property="hintLabel" destination="9Fr-47-Vmc" id="QbP-hK-WXX"/>
+                <outlet property="noSIPWindow" destination="xoQ-Md-fTl" id="tbc-ZW-4uc"/>
+                <outlet property="onboardVideo" destination="JLs-vQ-3om" id="5g5-4d-2tb"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
@@ -738,6 +741,26 @@ DQ
                 <rect key="frame" x="0.0" y="0.0" width="1" height="1"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
+        </window>
+        <window title="Disable System Integrity Protection" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="xoQ-Md-fTl">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" unifiedTitleAndToolbar="YES"/>
+            <rect key="contentRect" x="131" y="158" width="480" height="358"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" misplaced="YES" id="nRm-la-65f">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="358"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <avPlayerView misplaced="YES" controlsStyle="inline" id="JLs-vQ-3om">
+                        <rect key="frame" x="0.0" y="-38" width="480" height="360"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </avPlayerView>
+                </subviews>
+            </view>
+            <toolbar key="toolbar" implicitIdentifier="A216A3B8-3752-4030-9892-19FD48EB4B92" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="avv-qi-ZPE">
+                <allowedToolbarItems/>
+                <defaultToolbarItems/>
+            </toolbar>
+            <point key="canvasLocation" x="385" y="906"/>
         </window>
     </objects>
     <resources>
